@@ -23,7 +23,12 @@ export default {
         NSAppTransportSecurity: { NSAllowsArbitraryLoads: true },
       },
     },
-    android: { package: 'com.ggfix.employeeapp', adaptiveIcon: { backgroundColor: '#202124' }, usesCleartextTraffic: true },
+    android: { package: 'com.ggfix.employeeapp', adaptiveIcon: { backgroundColor: '#202124' } },
+    plugins: [
+      // The bare `android.usesCleartextTraffic` key is NOT read by Expo prebuild —
+      // cleartext HTTP must be enabled via expo-build-properties or the release APK blocks it.
+      ['expo-build-properties', { android: { usesCleartextTraffic: true } }],
+    ],
     extra: {
       API_HOST: host,
       // Required for EAS builds. Get this value by running `npx eas init`
